@@ -19,7 +19,7 @@ button.addEventListener('click', () => {
 
   bold.appendChild(userName);
 
-  document.querySelectorAll('div')[0].append(p);
-  document.querySelectorAll('div')[0].append(span);
-  document.querySelectorAll('div')[0].append(bold);
+  document.querySelector('.posts').append(p);
+  document.querySelector('.posts').append(span);
+  document.querySelector('.posts').append(bold);
 });
