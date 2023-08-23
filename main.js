@@ -6,6 +6,16 @@ button.addEventListener('click', () => {
   const msg = document.querySelector('#message').value;
 
   newPost(user, msg);
+  const likeButton = document.querySelector(`#thumbs-up-${currentPost - 1}`);
+  const dislikeButton = document.querySelector(`#thumbs-down-${currentPost - 1}`);
+
+  likeButton.addEventListener('click', () => {
+    alert("Test");
+  });
+
+  dislikeButton.addEventListener('click', () => {
+    alert("Test");
+  });
 });
 
 const newPost = (user, msg) => {
@@ -26,11 +36,11 @@ const newPost = (user, msg) => {
 
   const divider = document.createElement('hr');
 
-  document.querySelector('.posts').innerHTML += `<div id="${currentPost}">`;
+  document.querySelector('.posts').innerHTML += `<div id="post${currentPost}">`;
   document.querySelector('.posts').append(p);
   document.querySelector('.posts').append(span);
   document.querySelector('.posts').append(bold);
-  document.querySelector('.posts').innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link"><i class="fa-solid fa-thumbs-up"></i></span><span class="btn btn-link"><i class="fa-solid fa-thumbs-down"></i></span>';
+  document.querySelector('.posts').innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span id="dislikes-${currentPost}">`;
   document.querySelector('.posts').append(divider);
   document.querySelector('.posts').innerHTML += `</div>`;
 
@@ -40,4 +50,12 @@ const newPost = (user, msg) => {
 
   // Increment post count
   currentPost++;
+};
+
+const addLike = () => {
+
+};
+
+const addDislike = () => {
+
 };
