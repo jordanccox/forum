@@ -23,7 +23,7 @@ const newPost = (user, msg) => {
   document.querySelector('.posts').append(p);
   document.querySelector('.posts').append(span);
   document.querySelector('.posts').append(bold);
-  document.querySelector('.posts').innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span id="dislikes-${currentPost}"></span>`;
+  document.querySelector('.posts').innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span class="likes" id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span class="dislikes" id="dislikes-${currentPost}"></span>`;
   document.querySelector('.posts').append(divider);
   document.querySelector('.posts').innerHTML += `</div>`;
 
@@ -59,19 +59,43 @@ const createLikeAndDislike = () => {
       }
 
       likes.innerHTML = num;
+
+      postPopularity();
     });
 
     dislikeButton.addEventListener('click', () => {
-      alert(`dislike ${i}`);
+      const dislikes = document.querySelector(`#dislikes-${i}`);
+      let num = Number(dislikes.innerHTML);
+
+      if (dislikes.textContent === "") {
+        num = 1;
+      } else {
+        num++;
+      }
+
+      dislikes.innerHTML = num;
     });
 
   }
 };
 
-const addLike = () => {
+const postPopularity = () => {
+  const divsArray = [];
+  for (let i = 0; i < currentPost; i++) {
+    // reorder divs so that most liked posts are at the top of the forum
+    let currentDiv = document.querySelector(`#likes-${i}`);
+    divsArray.push(currentDiv);
+  }
 
-};
+  divsArray.sort((a,b) => {
+    if (Number(a.innerHTML) < Number(b.innerHTML)) {
+      return 1;
+    } else if (Number(a.innerHTML) > Number(b.innerHTML)) {
+      return -1;
+    }
 
-const addDislike = () => {
+    return 0;
+  });
 
+  console.log(divsArray);
 };
