@@ -64,6 +64,8 @@ const createLikeAndDislike = () => {
         }
 
         likes.innerHTML = num;
+
+        postPopularity();
       });
 
       // Set custom attribute to indicate that event listener has been added
@@ -76,7 +78,7 @@ const createLikeAndDislike = () => {
         let num = Number(dislikes.innerHTML);
 
         if (dislikes.textContent === "") {
-          num = 0;
+          num = 1;
         } else {
           num++;
         }
