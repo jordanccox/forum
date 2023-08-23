@@ -1,23 +1,6 @@
 const button = document.querySelector('#submit');
 let currentPost = 0;
 
-button.addEventListener('click', () => {
-  const user = document.querySelector('#name').value;
-  const msg = document.querySelector('#message').value;
-
-  newPost(user, msg);
-  const likeButton = document.querySelector(`#thumbs-up-${currentPost - 1}`);
-  const dislikeButton = document.querySelector(`#thumbs-down-${currentPost - 1}`);
-
-  likeButton.addEventListener('click', () => {
-    alert("Test");
-  });
-
-  dislikeButton.addEventListener('click', () => {
-    alert("Test");
-  });
-});
-
 const newPost = (user, msg) => {
   const p = document.createElement('p');
   const pContent = document.createTextNode(msg);
@@ -50,6 +33,30 @@ const newPost = (user, msg) => {
 
   // Increment post count
   currentPost++;
+};
+
+button.addEventListener('click', () => {
+  const user = document.querySelector('#name').value;
+  const msg = document.querySelector('#message').value;
+
+  newPost(user, msg);
+  createLikeAndDislike();
+});
+
+const createLikeAndDislike = () => {
+  for (let i = 0; i < currentPost; i++) {
+    const likeButton = document.querySelector(`#thumbs-up-${i}`);
+    const dislikeButton = document.querySelector(`#thumbs-down-${i}`);
+
+    likeButton.addEventListener('click', () => {
+      alert(`like ${i}`);
+    });
+
+    dislikeButton.addEventListener('click', () => {
+      alert(`dislike ${i}`);
+    });
+
+  }
 };
 
 const addLike = () => {
