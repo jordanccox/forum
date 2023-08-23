@@ -103,7 +103,11 @@ const postPopularity = () => {
 
   // console.log(divsArray[1].parentElement) // appendChild to put the contents of post in a post div, then we simply remove the posts and use a for loop to repost them in correct order
 
-  divsArray.forEach((post, index) => {
-    
-  })
+  // remove children
+  document.querySelector('.posts').innerHTML = ""; 
+ 
+  divsArray.forEach((post) => { // glitching for some reason -- starts incrementing the numbers by greater nums
+    document.querySelector('.posts').append(post.parentElement);
+  });
+
 };
