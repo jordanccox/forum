@@ -43,6 +43,7 @@ button.addEventListener('click', () => {
 
   newPost(user, msg);
   createLikeAndDislike();
+
 });
 
 const createLikeAndDislike = () => {
@@ -50,34 +51,42 @@ const createLikeAndDislike = () => {
     const likeButton = document.querySelector(`#thumbs-up-${i}`);
     const dislikeButton = document.querySelector(`#thumbs-down-${i}`);
 
-    likeButton.addEventListener('click', () => {
-      const likes = document.querySelector(`#likes-${i}`);
-      let num = Number(likes.innerHTML);
+    // Check if event listeners have already been added
+    if (!likeButton.hasAttribute('data-listener-added')) {
+      likeButton.addEventListener('click', () => {
+        const likes = document.querySelector(`#likes-${i}`);
+        let num = Number(likes.innerHTML);
 
-      if (likes.textContent === "") {
-        num = 1;
-      } else {
-        num++;
-      }
+        if (likes.textContent === "") {
+          num = 1;
+        } else {
+          num++;
+        }
 
-      likes.innerHTML = num;
+        likes.innerHTML = num;
+      });
 
-      postPopularity();
-    });
+      // Set custom attribute to indicate that event listener has been added
+      likeButton.setAttribute('data-listener-added', 'true');
+    }
 
-    dislikeButton.addEventListener('click', () => {
-      const dislikes = document.querySelector(`#dislikes-${i}`);
-      let num = Number(dislikes.innerHTML);
+    if (!dislikeButton.hasAttribute('data-listener-added')) {
+      dislikeButton.addEventListener('click', () => {
+        const dislikes = document.querySelector(`#dislikes-${i}`);
+        let num = Number(dislikes.innerHTML);
 
-      if (dislikes.textContent === "") {
-        num = 1;
-      } else {
-        num++;
-      }
+        if (dislikes.textContent === "") {
+          num = 0;
+        } else {
+          num++;
+        }
 
-      dislikes.innerHTML = num;
-    });
+        dislikes.innerHTML = num;
+      });
 
+      // Set custom attribute to indicate that event listener has been added
+      dislikeButton.setAttribute('data-listener-added', 'true');
+    }
   }
 };
 
@@ -99,14 +108,10 @@ const postPopularity = () => {
     return 0;
   });
 
-  console.log(divsArray); //testing
-
-  // console.log(divsArray[1].parentElement) // appendChild to put the contents of post in a post div, then we simply remove the posts and use a for loop to repost them in correct order
-
   // remove children
   document.querySelector('.posts').innerHTML = ""; 
  
-  divsArray.forEach((post) => { // glitching for some reason -- starts incrementing the numbers by greater nums
+  divsArray.forEach((post) => { 
     document.querySelector('.posts').append(post.parentElement);
   });
 
