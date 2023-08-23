@@ -29,4 +29,8 @@ const newPost = (user, msg) => {
   document.querySelector('.posts').append(span);
   document.querySelector('.posts').append(bold);
   document.querySelector('.posts').append(divider);
+
+  // Reset inputs
+  document.querySelector("#name").value = "";
+  document.querySelector("#message").value = "";
 };
