@@ -23,7 +23,7 @@ const newPost = (user, msg) => {
   document.querySelector('.posts').append(p);
   document.querySelector('.posts').append(span);
   document.querySelector('.posts').append(bold);
-  document.querySelector('.posts').innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span id="dislikes-${currentPost}">`;
+  document.querySelector('.posts').innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span id="dislikes-${currentPost}"></span>`;
   document.querySelector('.posts').append(divider);
   document.querySelector('.posts').innerHTML += `</div>`;
 
@@ -49,7 +49,16 @@ const createLikeAndDislike = () => {
     const dislikeButton = document.querySelector(`#thumbs-down-${i}`);
 
     likeButton.addEventListener('click', () => {
-      alert(`like ${i}`);
+      const likes = document.querySelector(`#likes-${i}`);
+      let num = Number(likes.innerHTML);
+
+      if (likes.textContent === "") {
+        num = 1;
+      } else {
+        num++;
+      }
+
+      likes.innerHTML = num;
     });
 
     dislikeButton.addEventListener('click', () => {
