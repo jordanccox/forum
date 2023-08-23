@@ -19,13 +19,15 @@ const newPost = (user, msg) => {
 
   const divider = document.createElement('hr');
 
-  document.querySelector('.posts').innerHTML += `<div id="post${currentPost}">`;
-  document.querySelector('.posts').append(p);
-  document.querySelector('.posts').append(span);
-  document.querySelector('.posts').append(bold);
-  document.querySelector('.posts').innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span class="likes" id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span class="dislikes" id="dislikes-${currentPost}"></span>`;
-  document.querySelector('.posts').append(divider);
-  document.querySelector('.posts').innerHTML += `</div>`;
+  const postDiv = document.createElement('div');
+  postDiv.setAttribute('id', `post${currentPost}`);
+  document.querySelector('.posts').append(postDiv);
+
+  document.querySelector(`#post${currentPost}`).append(p);
+  document.querySelector(`#post${currentPost}`).append(span);
+  document.querySelector(`#post${currentPost}`).append(bold);
+  document.querySelector(`#post${currentPost}`).innerHTML += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link thumbs-up" id="thumbs-up-${currentPost}"><i class="fa-solid fa-thumbs-up"></i></span><span class="likes" id="likes-${currentPost}"></span><span class="btn btn-link thumbs-down" id="thumbs-down-${currentPost}"><i class="fa-solid fa-thumbs-down"></i></span><span class="dislikes" id="dislikes-${currentPost}"></span>`;
+  document.querySelector(`#post${currentPost}`).append(divider);
 
   // Reset inputs
   document.querySelector("#name").value = "";
@@ -97,5 +99,11 @@ const postPopularity = () => {
     return 0;
   });
 
-  console.log(divsArray);
+  console.log(divsArray); //testing
+
+  // console.log(divsArray[1].parentElement) // appendChild to put the contents of post in a post div, then we simply remove the posts and use a for loop to repost them in correct order
+
+  divsArray.forEach((post, index) => {
+    
+  })
 };
