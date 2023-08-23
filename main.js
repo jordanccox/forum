@@ -1,4 +1,5 @@
 const button = document.querySelector('#submit');
+let currentPost = 0;
 
 button.addEventListener('click', () => {
   const user = document.querySelector('#name').value;
@@ -25,12 +26,18 @@ const newPost = (user, msg) => {
 
   const divider = document.createElement('hr');
 
+  document.querySelector('.posts').innerHTML += `<div id="${currentPost}">`;
   document.querySelector('.posts').append(p);
   document.querySelector('.posts').append(span);
   document.querySelector('.posts').append(bold);
+  document.querySelector('.posts').innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-link"><i class="fa-solid fa-thumbs-up"></i></span><span class="btn btn-link"><i class="fa-solid fa-thumbs-down"></i></span>';
   document.querySelector('.posts').append(divider);
+  document.querySelector('.posts').innerHTML += `</div>`;
 
   // Reset inputs
   document.querySelector("#name").value = "";
   document.querySelector("#message").value = "";
+
+  // Increment post count
+  currentPost++;
 };
