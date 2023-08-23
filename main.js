@@ -4,6 +4,10 @@ button.addEventListener('click', () => {
   const user = document.querySelector('#name').value;
   const msg = document.querySelector('#message').value;
 
+  newPost(user, msg);
+});
+
+const newPost = (user, msg) => {
   const p = document.createElement('p');
   const pContent = document.createTextNode(msg);
 
@@ -19,7 +23,10 @@ button.addEventListener('click', () => {
 
   bold.appendChild(userName);
 
+  const divider = document.createElement('hr');
+
   document.querySelector('.posts').append(p);
   document.querySelector('.posts').append(span);
   document.querySelector('.posts').append(bold);
-});
+  document.querySelector('.posts').append(divider);
+};
